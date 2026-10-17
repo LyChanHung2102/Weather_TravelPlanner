@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel & Weather Planner - Bento Edition</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/glass.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-weather="sunny">
+
+  <!-- Aurora Glow Background Elements -->
+  <div class="bg-scene">
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+  </div>
+
+  <!-- Main App Shell -->
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="app-header glass-panel">
+      <div class="app-brand">
+        <div class="brand-icon">✈️</div>
+        <div class="brand-text">
+          <h1>Travel & Weather Planner</h1>
+          <p>Lập lịch trình thông minh theo thời tiết</p>
+        </div>
+      </div>
+      <div class="app-meta">
+        <span class="status-dot"></span>
+        <span id="currentDateDisplay">Đang tải thời gian...</span>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         TẦNG 1: BENTO WEATHER DASHBOARD (Ngang toàn màn hình)
+         ==================================================================== -->
+    <section class="weather-bento-hero glass-panel" aria-label="Bento Weather Dashboard">
+      <div class="bento-hero-header">
+        <h2 class="section-heading">
+          <span>🌤️</span> Trung Tâm Dự Báo Thời Tiết
+        </h2>
+        <div class="city-select-box">
+          <label for="citySelect">Điểm đến:</label>
+          <select id="citySelect" class="glass-select">
+            <option value="dalat">Đà Lạt</option>
+            <option value="bienhoa">Biên Hòa</option>
+            <option value="vungtau">Vũng Tàu</option>
+            <option value="danang">Đà Nẵng</option>
+
+          </select>
+        </div>
+      </div>
+
+      <!-- Bento Metric Cells -->
+      <div class="bento-weather-grid">
+        <!-- Cell 1: Main Temp & Condition -->
+        <div class="bento-cell bento-cell-main glass-card">
+          <div class="weather-main-icon" id="weatherIcon">☀️</div>
+          <div class="weather-main-info">
+            <div class="weather-temp-val" id="weatherTemp">22°C</div>
+            <span class="weather-cond-badge" id="weatherCondition">Nắng ráo</span>
+          </div>
+        </div>
+
+        <!-- Cell 2: UV Index -->
+        <div class="bento-cell glass-card">
+          <div class="metric-label">☀️ Chỉ Số UV</div>
+          <div class="metric-value" id="uvIndex">3 (Thấp)</div>
+          <div class="metric-desc">An toàn cho da ngoài trời</div>
+        </div>
+
+        <!-- Cell 3: Rain Probability -->
+        <div class="bento-cell glass-card">
+          <div class="metric-label">🌧️ Khả Năng Mưa</div>
+          <div class="metric-value" id="rainProb">15%</div>
+          <div class="metric-desc">Thời tiết tạnh ráo, lý tưởng</div>
+        </div>
+
+        <!-- Cell 4: Wind Speed -->
+        <div class="bento-cell glass-card">
+          <div class="metric-label">💨 Tốc Độ Gió</div>
+          <div class="metric-value" id="windSpeed">12 km/h</div>
+          <div class="metric-desc">Gió nhẹ, se lạnh về chiều</div>
+        </div>
+      </div>
+
+      <!-- DẢI THẺ KÍNH CUỘN NGANG DỰ BÁO THEO GIỜ (Lựa chọn 1) -->
+      <div class="hourly-forecast-wrapper">
+        <div class="hourly-header">
+          <span>⏱️ Dự báo các khung giờ tiếp theo</span>
+          <span class="hourly-note">Kéo ngang để xem ➔</span>
+        </div>
+        <div class="hourly-carousel" id="hourlyCarousel">
+          <!-- Render tự động bởi JS -->
+        </div>
+      </div>
+
+      <!-- Smart Weather Tip Banner -->
+      <div class="smart-weather-banner" id="smartWeatherBanner">
+        <div class="banner-icon">💡</div>
+        <div class="banner-content" id="smartWeatherTip">
+          <strong>Smart Weather Tip:</strong> Tiết trời Đà Lạt đang rất đẹp và se lạnh nhẹ. Thích hợp mặc áo len mỏng, trench coat và mang theo máy ảnh chụp ảnh check-in ngoại cảnh!
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TẦNG 2: SPLIT BENTO (GỢI Ý ĐIỂM ĐẾN + LỊCH TRÌNH THEO NHÓM GIỜ)
+         ==================================================================== -->
+    <div class="bento-split-stage">
+
+      <!-- KHỐI BÊN TRÁI: GỢI Ý ĐIỂM ĐẾN (SUGGESTIONS MODULE) -->
+      <section class="suggestions-module glass-panel" aria-label="Gợi ý điểm đến">
+        <h2 class="section-heading">
+          <span>✨</span> Gợi Ý Điểm Đến Theo Vibe
+        </h2>
+
+        <!-- Vibe Filter Chips -->
+        <div class="vibe-filter-bar" id="vibeFilterBar">
+          <button class="vibe-chip active" data-vibe="all">Tất cả</button>
+          <button class="vibe-chip" data-vibe="autumn">Mùa thu</button>
+          <button class="vibe-chip" data-vibe="hot">Check-in hot</button>
+          <button class="vibe-chip" data-vibe="food">Ẩm thực</button>
+          <button class="vibe-chip" data-vibe="relax">Nghỉ dưỡng</button>
+        </div>
+
+        <!-- Destination Cards Scrollable List -->
+        <div class="suggestions-grid" id="suggestionsGrid">
+          <!-- Dynamic cards rendered by JS -->
+        </div>
+      </section>
+
+      <!-- KHỐI BÊN PHẢI: KẾ HOẠCH LỊCH TRÌNH (ITINERARY MODULE) -->
+      <section class="itinerary-module glass-panel" aria-label="Kế hoạch lịch trình">
+        <h2 class="section-heading">
+          <span>📍</span> Kế Hoạch Lịch Trình Chi Tiết
+        </h2>
+
+        <!-- Add Itinerary Form with Glass Dual-Wheel Time Popover -->
+        <form id="itineraryForm" class="itinerary-form">
+          <input 
+            type="text" 
+            id="placeInput" 
+            class="glass-input" 
+            placeholder="Nhập tên địa điểm ghé thăm..." 
+            required 
+            autocomplete="off"
+          >
+          
+          <!-- Cụm chọn giờ kính mờ số to -->
+          <div class="time-picker-wrapper">
+            <input 
+              type="text" 
+              id="timeInput" 
+              class="glass-input" 
+              value="08:00"
+              readonly
+              title="Bấm để mở bảng chọn giờ số to"
+              style="cursor: pointer; width: 100%;"
+            >
+
+            <!-- Popover Glass Dual-Wheel -->
+            <div class="glass-time-popover" id="glassTimePopover">
+              <!-- Tab chọn nhanh buổi -->
+              <div class="popover-period-tabs">
+                <button type="button" class="period-tab-btn active" data-period="morning">🌅 Sáng</button>
+                <button type="button" class="period-tab-btn" data-period="afternoon">☀️ Chiều</button>
+                <button type="button" class="period-tab-btn" data-period="evening">🌙 Tối</button>
+              </div>
+
+              <!-- 2 Cột bánh xe Giờ & Phút -->
+              <div class="dual-wheel-columns">
+                <div class="wheel-column">
+                  <div class="column-title">GIỜ</div>
+                  <div class="scroll-wheel-list" id="wheelHourList">
+                    <!-- Sinh tự động từ 00 đến 23 -->
+                  </div>
+                </div>
+                <div class="wheel-column">
+                  <div class="column-title">PHÚT</div>
+                  <div class="scroll-wheel-list" id="wheelMinuteList">
+                    <!-- Sinh tự động: 00, 15, 30, 45... -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="popover-footer">
+                <button type="button" class="btn-time-done" id="btnTimeDone">Xong ✓</button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="glass-btn glass-btn-primary">
+            <span>+</span> Thêm
+          </button>
+        </form>
+
+        <!-- List Controls: Search, Filter, Sort, Pagination Size -->
+        <div class="list-controls-bar">
+          <!-- 1. Search -->
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="glass-input" 
+            placeholder="🔍 Tìm địa điểm..."
+          >
+
+          <!-- 2. Filter -->
+          <select id="filterStatus" class="glass-select">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="visited">Đã đến</option>
+            <option value="unvisited">Chưa đến</option>
+          </select>
+
+          <!-- 3. Sort -->
+          <select id="sortBy" class="glass-select">
+            <option value="time-asc">Thời gian: Sớm ➔ Muộn</option>
+            <option value="time-desc">Thời gian: Muộn ➔ Sớm</option>
+            <option value="name-asc">Tên: A ➔ Z</option>
+            <option value="name-desc">Tên: Z ➔ A</option>
+          </select>
+
+          <!-- 4. Page Size -->
+          <select id="pageSizeSelect" class="glass-select">
+            <option value="10">10 / trang</option>
+            <option value="20">20 / trang</option>
+            <option value="50">50 / trang</option>
+            <option value="all">Tất cả</option>
+          </select>
+        </div>
+
+        <!-- Grouped Timeline (Sáng / Chiều / Tối) -->
+        <div class="timeline-container" id="timelineContainer">
+          <!-- Rendered dynamically by JS -->
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-bar">
+          <button id="prevPageBtn" class="glass-btn">‹ Trang trước</button>
+          <div id="paginationPages" class="pagination-pages">
+            <!-- Page numbers rendered dynamically -->
+          </div>
+          <button id="nextPageBtn" class="glass-btn">Trang sau ›</button>
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/weather.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

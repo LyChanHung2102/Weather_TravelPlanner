@@ -1,0 +1,828 @@
+/* ==========================================================================
+   STYLE.CSS - BENTO GRID HYBRID SYSTEM (PHƯƠNG ÁN C)
+   Layout, Typography, Bento Weather Dashboard, Suggestions, Grouped Itinerary
+   ========================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  color: var(--text-main);
+  background: #090d16;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* Background Scene with Aurora Orbs */
+.bg-scene {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: radial-gradient(circle at 15% 15%, #171a33 0%, #090d16 100%);
+  overflow: hidden;
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.7;
+  animation: floatOrb 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.orb-1 {
+  width: 550px;
+  height: 550px;
+  background: var(--aurora-1);
+  top: -120px;
+  left: -80px;
+}
+
+.orb-2 {
+  width: 650px;
+  height: 650px;
+  background: var(--aurora-2);
+  bottom: -150px;
+  right: -100px;
+  animation-duration: 24s;
+  animation-delay: -6s;
+}
+
+.orb-3 {
+  width: 500px;
+  height: 500px;
+  background: var(--aurora-3);
+  top: 35%;
+  left: 40%;
+  animation-duration: 18s;
+  animation-delay: -3s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 45px) scale(1.1); }
+  100% { transform: translate(-50px, 70px) scale(0.95); }
+}
+
+/* App Container */
+.app-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: relative;
+  z-index: 1;
+}
+
+/* App Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.brand-text h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brand-text p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.app-meta {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+/* ==========================================================================
+   TẦNG 1: BENTO WEATHER DASHBOARD (HORIZONTAL STRIP)
+   ========================================================================== */
+.weather-bento-hero {
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bento-hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* API Weather Loading State */
+.weather-bento-hero.loading-weather {
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+}
+
+.weather-bento-hero.loading-weather .weather-main-icon {
+  animation: pulseSpin 1s infinite linear;
+}
+
+@keyframes pulseSpin {
+  0% { transform: rotate(0deg) scale(0.95); opacity: 0.7; }
+  50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
+  100% { transform: rotate(360deg) scale(0.95); opacity: 0.7; }
+}
+
+.section-heading {
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.city-select-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.city-select-box label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Bento Cells Grid */
+.bento-weather-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.bento-cell {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-cell-main {
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.weather-main-icon {
+  font-size: 3.2rem;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+  transition: transform 0.3s ease;
+}
+
+.bento-cell-main:hover .weather-main-icon {
+  transform: scale(1.1) rotate(6deg);
+}
+
+.weather-main-info .weather-temp-val {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.weather-main-info .weather-cond-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.metric-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.metric-desc {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   DẢI THẺ KÍNH CUỘN NGANG DỰ BÁO THEO GIỜ (Hourly Carousel - Lựa chọn 1)
+   ========================================================================== */
+.hourly-forecast-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--glass-radius-md);
+}
+
+.hourly-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.hourly-note {
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+
+.hourly-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-behavior: smooth;
+}
+
+.hourly-carousel::-webkit-scrollbar {
+  height: 4px;
+}
+
+.hourly-carousel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+
+/* Thẻ Mini Glass Card theo từng giờ */
+.hourly-card {
+  min-width: 82px;
+  padding: 10px 8px;
+  border-radius: var(--glass-radius-sm);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  transition: all 0.22s ease;
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.hourly-card:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.hourly-card.active-hour {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 14px var(--weather-glow);
+}
+
+.hourly-time {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.hourly-card.active-hour .hourly-time {
+  color: #fff;
+  font-weight: 700;
+}
+
+.hourly-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+}
+
+.hourly-temp {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hourly-rain {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #93c5fd;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.smart-weather-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--glass-radius-md);
+}
+
+.banner-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.banner-content {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.tip-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tip-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.tip-text {
+  font-size: 0.92rem;
+  color: var(--text-main);
+}
+
+.outfit-highlight {
+  color: #fef08a; /* Vàng sáng dịu dễ đọc, nổi bật hẳn trên nền kính */
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(254, 240, 138, 0.3);
+}
+
+/* ==========================================================================
+   TẦNG 2: SPLIT BENTO (SUGGESTIONS + ITINERARY)
+   ========================================================================== */
+.bento-split-stage {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* Module Gợi ý (Suggestions Module) */
+.suggestions-module {
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vibe-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.vibe-filter-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.vibe-filter-bar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.suggestions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 620px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.suggestions-grid::-webkit-scrollbar {
+  width: 5px;
+}
+
+.suggestions-grid::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Destination Card */
+.dest-card {
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+  border-radius: var(--glass-radius-md);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.25s ease;
+}
+
+.dest-card:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.dest-thumb {
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.dest-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.dest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.dest-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.dest-rating {
+  font-size: 0.8rem;
+  color: #fbbf24;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dest-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-add-plan {
+  align-self: flex-start;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-add-plan:hover {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 12px var(--weather-glow);
+  transform: scale(1.03);
+}
+
+/* Module Lịch Trình (Itinerary Module) */
+.itinerary-module {
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itinerary-form {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr auto;
+  gap: 10px;
+}
+
+/* 4-Feature Controls */
+.list-controls-bar {
+  display: grid;
+  grid-template-columns: 1.8fr 1.1fr 1.2fr 1fr;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--glass-radius-md);
+}
+
+/* Timeline Group Sections (Sáng / Chiều / Tối) */
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 280px;
+}
+
+.time-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.group-badge {
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.itinerary-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.itinerary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: var(--glass-radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInSlide 0.3s ease forwards;
+}
+
+.itinerary-item:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateX(4px);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.itinerary-item.visited {
+  opacity: 0.6;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.itinerary-item.visited .item-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.item-time-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-time {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.rain-warning {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge-status {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.25);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.itinerary-item.visited .badge-status {
+  background: rgba(16, 185, 129, 0.25);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-icon.btn-delete:hover {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 36px 16px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+/* Pagination Bar */
+.pagination-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.page-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.page-btn.active {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: #fff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Animation */
+@keyframes fadeInSlide {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes transferFly {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05) translateY(-6px); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-transfer {
+  animation: transferFly 0.4s ease;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Bento Adaptive)
+   ========================================================================== */
+@media (max-width: 1080px) {
+  .bento-weather-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bento-split-stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .bento-weather-grid {
+    grid-template-columns: 1fr;
+  }
+  .itinerary-form {
+    grid-template-columns: 1fr;
+  }
+  .list-controls-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-controls-bar {
+    grid-template-columns: 1fr;
+  }
+  .pagination-bar {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,389 @@
+/* ==========================================================================
+   GLASSMORPHISM & THEME TOKENS (glass.css)
+   Refactored for Bento Grid & Standards in skill.md
+   ========================================================================== */
+
+:root {
+  /* Aurora Glow Orbs */
+  --aurora-1: rgba(255, 126, 95, 0.4);
+  --aurora-2: rgba(114, 9, 183, 0.35);
+  --aurora-3: rgba(67, 97, 238, 0.4);
+  --aurora-4: rgba(76, 201, 240, 0.3);
+
+  /* Exact Glassmorphism specs per user prompt */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg-hover: rgba(255, 255, 255, 0.22);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.25);
+  --glass-blur: blur(14px);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+  --glass-shadow-hover: 0 12px 36px 0 rgba(0, 0, 0, 0.3);
+  --glass-radius-lg: 20px;
+  --glass-radius-md: 14px;
+  --glass-radius-sm: 10px;
+
+  /* Typography Colors */
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.78);
+  --text-dim: rgba(255, 255, 255, 0.55);
+
+  /* Dynamic Weather Accents */
+  --weather-accent: #f77f00;
+  --weather-glow: rgba(247, 127, 0, 0.35);
+  --chip-bg: rgba(255, 255, 255, 0.12);
+  --chip-active: rgba(255, 255, 255, 0.35);
+}
+
+/* Dynamic Weather Themes */
+body[data-weather="sunny"] {
+  --weather-accent: #ffb703;
+  --weather-glow: rgba(255, 183, 3, 0.4);
+  --aurora-1: rgba(251, 133, 0, 0.45);
+  --aurora-2: rgba(255, 183, 3, 0.35);
+  --aurora-3: rgba(239, 71, 111, 0.3);
+}
+
+body[data-weather="rainy"] {
+  --weather-accent: #48cae4;
+  --weather-glow: rgba(72, 202, 228, 0.4);
+  --aurora-1: rgba(3, 4, 94, 0.45);
+  --aurora-2: rgba(0, 119, 182, 0.4);
+  --aurora-3: rgba(72, 202, 228, 0.3);
+}
+
+body[data-weather="cloudy"] {
+  --weather-accent: #90e0ef;
+  --weather-glow: rgba(144, 224, 239, 0.35);
+  --aurora-1: rgba(85, 98, 112, 0.45);
+  --aurora-2: rgba(78, 205, 196, 0.3);
+  --aurora-3: rgba(199, 244, 100, 0.25);
+}
+
+/* Base Glass Components */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--glass-radius-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+  box-shadow: var(--glass-shadow-hover);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--glass-radius-md);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+}
+
+.glass-input,
+.glass-select {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--glass-radius-sm);
+  color: var(--text-main);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.glass-input::placeholder {
+  color: var(--text-dim);
+}
+
+.glass-input:focus,
+.glass-select:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 14px var(--weather-glow);
+}
+
+/* ==========================================================================
+   STYLIZED NATIVE GLASS TIME INPUT (Lựa chọn 1)
+   Font số Monospace kỹ thuật số, Icon đồng hồ sáng phát quang, tương phản cao
+   ========================================================================== */
+.glass-input[type="time"] {
+  font-family: ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  color: #ffffff;
+  min-width: 130px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.glass-input[type="time"]:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Biến đổi icon đồng hồ mặc định của Chromium / WebKit (Chrome, Edge, Cốc Cốc, Safari) */
+.glass-input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 3px;
+  margin-left: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  transform: scale(1.22);
+  filter: invert(1) brightness(2.2) drop-shadow(0 0 8px var(--weather-glow));
+}
+
+/* Tùy biến vùng nhập số giờ/phút khi focus */
+.glass-input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0 2px;
+}
+
+/* ==========================================================================
+   GLASS POPOVER DUAL-WHEEL TIME PICKER (Lựa chọn A)
+   Bảng kính mờ số to, chia cột Giờ & Phút, tương phản cực rõ nét
+   ========================================================================== */
+.time-picker-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.glass-time-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 100;
+  width: 260px;
+  background: rgba(17, 24, 39, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--glass-radius-md);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--weather-glow);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.96);
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-time-popover.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Thanh chọn nhanh buổi (Sáng / Chiều / Tối) */
+.popover-period-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.period-tab-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 5px 2px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.period-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.period-tab-btn.active {
+  background: rgba(255, 255, 255, 0.32);
+  border-color: #fff;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+}
+
+/* 2 Cột Giờ & Phút */
+.dual-wheel-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.wheel-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.column-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.scroll-wheel-list {
+  max-height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 2px;
+}
+
+.scroll-wheel-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scroll-wheel-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+
+.time-num-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: ui-monospace, SFMono-Regular, "Roboto Mono", monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 8px 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.time-num-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.04);
+}
+
+.time-num-item.selected {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.15));
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 12px var(--weather-glow);
+  color: #fff;
+}
+
+/* Nút xác nhận Done */
+.popover-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-time-done {
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-time-done:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.glass-select option {
+  background: #111827;
+  color: #ffffff;
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--glass-radius-sm);
+  color: var(--text-main);
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.glass-btn:active {
+  transform: translateY(0);
+}
+
+.glass-btn-primary {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 16px var(--weather-glow);
+}
+
+.glass-btn-primary:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.22));
+  box-shadow: 0 6px 22px var(--weather-glow);
+}
+
+/* Filter Chips */
+.vibe-chip {
+  padding: 7px 16px;
+  border-radius: 20px;
+  background: var(--chip-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.vibe-chip:hover {
+  background: rgba(255, 255, 255, 0.24);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.vibe-chip.active {
+  background: var(--chip-active);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+}
