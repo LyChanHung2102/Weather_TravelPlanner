@@ -59,11 +59,13 @@ const WEATHER_DATA = {
 };
 
 // ==========================================================================
-// 2. DỮ LIỆU GỢI Ý ĐIỂM ĐẾN (Destination Suggestions Data)
+// 2. DỮ LIỆU GỢI Ý ĐIỂM ĐẾN PHÂN THEO TỪNG THÀNH PHỐ (Destination Data by City)
 // ==========================================================================
 const DESTINATIONS_DATA = [
+  // --- ĐÀ LẠT ---
   {
-    id: 'dest-1',
+    id: 'dl-1',
+    city: 'dalat',
     name: 'Tiệm Cà Phê Túi Mơ To',
     vibe: 'autumn',
     rating: '⭐ 4.8',
@@ -73,7 +75,8 @@ const DESTINATIONS_DATA = [
     desc: 'Không gian nhà gỗ ngắm thung lũng hoa cúc họa mi'
   },
   {
-    id: 'dest-2',
+    id: 'dl-2',
+    city: 'dalat',
     name: 'Đồi Chè Cầu Đất Farm',
     vibe: 'hot',
     rating: '⭐ 4.9',
@@ -83,7 +86,8 @@ const DESTINATIONS_DATA = [
     desc: 'Điểm săn mây và check-in cánh đồng điện gió nổi tiếng'
   },
   {
-    id: 'dest-3',
+    id: 'dl-3',
+    city: 'dalat',
     name: 'Lẩu Gà Lá É Tao Ngộ',
     vibe: 'food',
     rating: '⭐ 4.7',
@@ -93,7 +97,8 @@ const DESTINATIONS_DATA = [
     desc: 'Đặc sản làm ấm bụng trong tiết trời se lạnh'
   },
   {
-    id: 'dest-4',
+    id: 'dl-4',
+    city: 'dalat',
     name: 'Hồ Tuyền Lâm & Thiền Viện',
     vibe: 'relax',
     rating: '⭐ 4.9',
@@ -103,7 +108,8 @@ const DESTINATIONS_DATA = [
     desc: 'Chèo thuyền SUP thư giãn và không gian thiền tịnh'
   },
   {
-    id: 'dest-5',
+    id: 'dl-5',
+    city: 'dalat',
     name: 'Quảng Trường Lâm Viên',
     vibe: 'hot',
     rating: '⭐ 4.6',
@@ -113,7 +119,8 @@ const DESTINATIONS_DATA = [
     desc: 'Biểu tượng hoa Dã Quỳ và Atiso khổng lồ bên Hồ Xuân Hương'
   },
   {
-    id: 'dest-6',
+    id: 'dl-6',
+    city: 'dalat',
     name: 'Chợ Đêm Đà Lạt (Phố Đi Bộ)',
     vibe: 'food',
     rating: '⭐ 4.5',
@@ -122,41 +129,167 @@ const DESTINATIONS_DATA = [
     thumb: 'https://images.unsplash.com/photo-1543083477-4f785aeafaa9?auto=format&fit=crop&w=300&q=80',
     desc: 'Thưởng thức bánh tráng nướng, sữa đậu nành nóng hổi'
   },
+
+  // --- ĐÀ NẴNG ---
   {
-    id: 'dest-7',
-    name: 'Cầu Rồng (Đà Nẵng)',
+    id: 'dn-1',
+    city: 'danang',
+    name: 'Cầu Rồng Đà Nẵng',
     vibe: 'hot',
     rating: '⭐ 4.9',
-    hours: 'Cả ngày (Phun lửa 21:00 cuối tuần)',
+    hours: 'Cả ngày (21:00 phun lửa cuối tuần)',
     bestTime: '20:30',
     thumb: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=300&q=80',
     desc: 'Biểu tượng sông Hàn, xem rồng phun lửa & nước rực rỡ'
   },
   {
-    id: 'dest-8',
-    name: 'Bãi Biển Mỹ Khê (Đà Nẵng)',
+    id: 'dn-2',
+    city: 'danang',
+    name: 'Bãi Biển Mỹ Khê',
     vibe: 'relax',
     rating: '⭐ 4.8',
     hours: '05:00 - 19:00',
     bestTime: '06:00',
     thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80',
-    desc: 'Top bãi biển quyến rũ nhất hành tinh với cát trắng mịn'
+    desc: 'Top bãi biển quyến rũ nhất hành tinh với bãi cát dài trắng mịn'
+  },
+  {
+    id: 'dn-3',
+    city: 'danang',
+    name: 'Bán Đảo Sơn Trà & Chùa Linh Ứng',
+    vibe: 'autumn',
+    rating: '⭐ 4.9',
+    hours: '06:00 - 18:00',
+    bestTime: '15:00',
+    thumb: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=300&q=80',
+    desc: 'Ngắm toàn cảnh biển Đà Nẵng từ trên cao và tượng Phật Bà'
+  },
+  {
+    id: 'dn-4',
+    city: 'danang',
+    name: 'Chợ Cồn - Thiên Đường Ẩm Thực',
+    vibe: 'food',
+    rating: '⭐ 4.7',
+    hours: '07:00 - 19:30',
+    bestTime: '11:30',
+    thumb: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80',
+    desc: 'Thưởng thức mì Quảng ếch, bánh tráng cuốn thịt heo, chè sầu'
+  },
+
+  // --- VŨNG TÀU ---
+  {
+    id: 'vt-1',
+    city: 'vungtau',
+    name: 'Mũi Nghinh Phong & Cổng Trời',
+    vibe: 'hot',
+    rating: '⭐ 4.8',
+    hours: 'Cả ngày',
+    bestTime: '16:00',
+    thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80',
+    desc: 'Đón gió biển lồng lộng và check-in Cổng Trời view biển tuyệt đẹp'
+  },
+  {
+    id: 'vt-2',
+    city: 'vungtau',
+    name: 'Hải Đăng Vũng Tàu',
+    vibe: 'autumn',
+    rating: '⭐ 4.7',
+    hours: '07:00 - 22:00',
+    bestTime: '08:30',
+    thumb: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=300&q=80',
+    desc: 'Ngọn hải đăng cổ nhất Việt Nam, ngắm toàn cảnh thành phố biển'
+  },
+  {
+    id: 'vt-3',
+    city: 'vungtau',
+    name: 'Bánh Khọt Cô Ba Vũng Tàu',
+    vibe: 'food',
+    rating: '⭐ 4.6',
+    hours: '07:00 - 22:00',
+    bestTime: '12:00',
+    thumb: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80',
+    desc: 'Bánh khọt tôm mực giòn rụm cuốn rau thơm xanh mướt'
+  },
+  {
+    id: 'vt-4',
+    city: 'vungtau',
+    name: 'Bãi Sau Vũng Tàu (Thùy Vân)',
+    vibe: 'relax',
+    rating: '⭐ 4.7',
+    hours: '05:00 - 18:30',
+    bestTime: '06:30',
+    thumb: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=300&q=80',
+    desc: 'Bãi tắm sóng êm, dạo bộ ngắm bình minh trên biển'
+  },
+
+  // --- BIÊN HÒA ---
+  {
+    id: 'bh-1',
+    city: 'bienhoa',
+    name: 'Khu Du Lịch Bửu Long',
+    vibe: 'autumn',
+    rating: '⭐ 4.6',
+    hours: '07:00 - 17:00',
+    bestTime: '08:00',
+    thumb: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=300&q=80',
+    desc: 'Được mệnh danh là Vịnh Hạ Long thu nhỏ của miền Đông Nam Bộ'
+  },
+  {
+    id: 'bh-2',
+    city: 'bienhoa',
+    name: 'Làng Bưởi Tân Triều',
+    vibe: 'relax',
+    rating: '⭐ 4.5',
+    hours: '08:00 - 20:00',
+    bestTime: '14:00',
+    thumb: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=300&q=80',
+    desc: 'Thưởng thức gỏi bưởi, rượu bưởi trong không gian miệt vườn râm mát'
+  },
+  {
+    id: 'bh-3',
+    city: 'bienhoa',
+    name: 'Gỏi Cá Tân Mai (Đặc Sản)',
+    vibe: 'food',
+    rating: '⭐ 4.8',
+    hours: '10:00 - 21:00',
+    bestTime: '18:30',
+    thumb: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80',
+    desc: 'Món đặc sản trứ danh ven sông Đồng Nai cuốn bánh tráng rau rừng'
+  },
+  {
+    id: 'bh-4',
+    city: 'bienhoa',
+    name: 'Cù Lao Phố & Chùa Ông',
+    vibe: 'hot',
+    rating: '⭐ 4.6',
+    hours: '06:00 - 18:00',
+    bestTime: '16:30',
+    thumb: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=300&q=80',
+    desc: 'Di tích lịch sử văn hóa lâu đời với kiến trúc cổ kính bình yên'
   }
 ];
 
 // ==========================================================================
-// 3. STATE QUẢN LÝ ỨNG DỤNG
+// 3. STATE QUẢN LÝ ỨNG DỤNG (Lưu độc lập từng thành phố theo Lựa chọn 2)
 // ==========================================================================
 let currentCity = localStorage.getItem('travel_city') || 'dalat';
 let currentVibe = 'all';
 
-// Danh sách lịch trình (khôi phục từ localStorage nếu có)
-let itineraryItems = JSON.parse(localStorage.getItem('travel_itinerary')) || [
-  { id: '1', title: 'Đồi Chè Cầu Đất (Săn mây)', time: '06:00', visited: true },
-  { id: '2', title: 'Tiệm Cà Phê Túi Mơ To', time: '09:00', visited: false },
-  { id: '3', title: 'Chèo SUP Hồ Tuyền Lâm', time: '14:30', visited: false },
-  { id: '4', title: 'Lẩu Gà Lá É & Dạo Chợ Đêm', time: '19:00', visited: false }
-];
+// Quản lý lịch trình độc lập theo thành phố { dalat: [...], danang: [...], ... }
+let cityItineraries = JSON.parse(localStorage.getItem('travel_city_itineraries')) || {
+  dalat: [
+    { id: 'dl-demo-1', title: 'Tiệm Cà Phê Túi Mơ To', time: '08:30', visited: true },
+    { id: 'dl-demo-2', title: 'Quảng Trường Lâm Viên', time: '16:00', visited: false }
+  ]
+};
+
+// Lấy danh sách lịch trình của thành phố hiện tại (nếu chưa có thì là mảng rỗng [])
+function getCurrentCityItinerary() {
+  if (!cityItineraries[currentCity]) {
+    cityItineraries[currentCity] = [];
+  }
+  return cityItineraries[currentCity];
+}
 
 let searchQuery = '';
 let filterStatus = 'all';
@@ -224,15 +357,28 @@ function renderHourlyCarousel(hourlyList) {
 }
 
 // ==========================================================================
-// 5. MODULE GỢI Ý ĐIỂM ĐẾN (Suggestions Controller)
+// 5. MODULE GỢI Ý ĐIỂM ĐẾN (Suggestions Controller - Lọc theo Thành Phố)
 // ==========================================================================
 function renderSuggestions() {
   const container = document.getElementById('suggestionsGrid');
-  const filtered = currentVibe === 'all'
-    ? DESTINATIONS_DATA
-    : DESTINATIONS_DATA.filter(item => item.vibe === currentVibe);
+  
+  // Lọc điểm đến theo Thành phố đang chọn VÀ theo Vibe
+  let cityDests = DESTINATIONS_DATA.filter(item => item.city === currentCity);
+  
+  if (currentVibe !== 'all') {
+    cityDests = cityDests.filter(item => item.vibe === currentVibe);
+  }
 
-  container.innerHTML = filtered.map(item => `
+  if (cityDests.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <p>✨ Chưa có gợi ý cho bộ lọc này tại ${WEATHER_DATA[currentCity]?.name || 'thành phố này'}. Hãy thử chọn tab khác!</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = cityDests.map(item => `
     <div class="dest-card">
       <img src="${item.thumb}" alt="${item.name}" class="dest-thumb" loading="lazy">
       <div class="dest-info">
@@ -251,10 +397,12 @@ function renderSuggestions() {
   `).join('');
 }
 
-// Thêm địa điểm từ khối Gợi ý sang Lịch trình
+// Thêm địa điểm từ khối Gợi ý sang Lịch trình của Thành Phố Hiện Tại
 window.addFromSuggestion = function(destId) {
   const dest = DESTINATIONS_DATA.find(d => d.id === destId);
   if (!dest) return;
+
+  const currentList = getCurrentCityItinerary();
 
   const newItem = {
     id: Date.now().toString(),
@@ -263,7 +411,7 @@ window.addFromSuggestion = function(destId) {
     visited: false
   };
 
-  itineraryItems.push(newItem);
+  currentList.push(newItem);
   saveItinerary();
   renderItineraryList();
 
@@ -277,7 +425,7 @@ window.addFromSuggestion = function(destId) {
 // 6. MODULE LỊCH TRÌNH (Itinerary Controller & 4-Feature Standards)
 // ==========================================================================
 function saveItinerary() {
-  localStorage.setItem('travel_itinerary', JSON.stringify(itineraryItems));
+  localStorage.setItem('travel_city_itineraries', JSON.stringify(cityItineraries));
 }
 
 // Phân nhóm Sáng / Chiều / Tối
@@ -288,9 +436,10 @@ function getTimeGroup(timeStr) {
   return 'Tối (18:00 - 23:59)';
 }
 
-// Lọc, tìm kiếm, sắp xếp và phân trang
+// Lọc, tìm kiếm, sắp xếp và phân trang của Thành Phố Hiện Tại
 function getProcessedItems() {
-  let list = [...itineraryItems];
+  const currentList = getCurrentCityItinerary();
+  let list = [...currentList];
 
   // 1. Search
   if (searchQuery.trim()) {
@@ -320,11 +469,13 @@ function getProcessedItems() {
 function renderItineraryList() {
   const container = document.getElementById('timelineContainer');
   const allProcessed = getProcessedItems();
+  const cityName = WEATHER_DATA[currentCity]?.name || 'thành phố này';
 
   if (allProcessed.length === 0) {
     container.innerHTML = `
       <div class="empty-state">
-        <p>📭 Chưa có địa điểm nào phù hợp. Hãy tìm kiếm khác hoặc thêm địa điểm mới!</p>
+        <p>📭 Chưa có lịch trình nào cho ${cityName}.</p>
+        <p style="font-size:0.82rem; margin-top:6px; opacity:0.8;">Hãy nhập địa điểm mới ở trên hoặc bấm <strong>"+ Thêm vào Plan"</strong> từ danh sách gợi ý bên trái!</p>
       </div>
     `;
     renderPagination(0);
@@ -405,6 +556,72 @@ function renderItineraryList() {
   container.innerHTML = html;
 }
 
+window.toggleItemStatus = function(id) {
+  const currentList = getCurrentCityItinerary();
+  const item = currentList.find(i => String(i.id) === String(id));
+  if (item) {
+    item.visited = !item.visited;
+    saveItinerary();
+    renderItineraryList();
+  }
+};
+
+// ==========================================================================
+// LOGIC XÁC NHẬN XÓA KÍNH MỜ (Glass Confirm Modal Controller)
+// ==========================================================================
+let pendingDeleteId = null;
+
+window.deleteItem = function(id) {
+  const currentList = getCurrentCityItinerary();
+  const item = currentList.find(i => String(i.id) === String(id));
+  if (!item) return;
+
+  pendingDeleteId = id;
+  const cityName = WEATHER_DATA[currentCity]?.name || 'thành phố này';
+  
+  // Cập nhật nội dung modal với tên địa điểm thực tế
+  const descEl = document.getElementById('modalDeleteDesc');
+  if (descEl) {
+    descEl.innerHTML = `Bạn có chắc chắn muốn xóa <strong>"${item.title}"</strong> khỏi lịch trình tại <strong>${cityName}</strong> không?`;
+  }
+
+  // Hiển thị modal kính mờ
+  const modal = document.getElementById('deleteConfirmModal');
+  if (modal) modal.classList.add('show');
+};
+
+function executeDelete() {
+  if (!pendingDeleteId) return;
+
+  const idToDelete = pendingDeleteId;
+  pendingDeleteId = null;
+
+  // Đóng modal
+  const modal = document.getElementById('deleteConfirmModal');
+  if (modal) modal.classList.remove('show');
+
+  // Animation mờ dần trên thẻ cần xóa
+  const itemEl = document.querySelector(`.itinerary-item[data-id="${idToDelete}"]`);
+  if (itemEl) {
+    itemEl.style.transition = 'all 0.25s ease';
+    itemEl.style.opacity = '0';
+    itemEl.style.transform = 'translateX(20px) scale(0.95)';
+  }
+
+  setTimeout(() => {
+    const currentList = getCurrentCityItinerary();
+    cityItineraries[currentCity] = currentList.filter(i => String(i.id) !== String(idToDelete));
+    saveItinerary();
+    renderItineraryList();
+  }, itemEl ? 220 : 0);
+}
+
+function closeDeleteModal() {
+  pendingDeleteId = null;
+  const modal = document.getElementById('deleteConfirmModal');
+  if (modal) modal.classList.remove('show');
+}
+
 function renderPagination(totalPages) {
   const pagesContainer = document.getElementById('paginationPages');
   const prevBtn = document.getElementById('prevPageBtn');
@@ -440,21 +657,6 @@ window.goToPage = function(page) {
   renderItineraryList();
 };
 
-window.toggleItemStatus = function(id) {
-  const item = itineraryItems.find(i => i.id === id);
-  if (item) {
-    item.visited = !item.visited;
-    saveItinerary();
-    renderItineraryList();
-  }
-};
-
-window.deleteItem = function(id) {
-  itineraryItems = itineraryItems.filter(i => i.id !== id);
-  saveItinerary();
-  renderItineraryList();
-};
-
 // ==========================================================================
 // 7. SỰ KIỆN KHỞI TẠO (Event Listeners & Init)
 // ==========================================================================
@@ -472,11 +674,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   updateClock();
 
-  // 2. City Selector
+  // 2. City Selector - Khi đổi thành phố, tự động cập nhật: Thời tiết, Gợi ý điểm đến, Lịch trình riêng
   const citySelect = document.getElementById('citySelect');
   citySelect.value = currentCity;
   citySelect.addEventListener('change', (e) => {
-    updateWeatherUI(e.target.value);
+    const newCity = e.target.value;
+    updateWeatherUI(newCity);
+    renderSuggestions();   // Cập nhật lại gợi ý điểm đến theo thành phố mới
+    renderItineraryList(); // Cập nhật lại lịch trình riêng của thành phố mới
   });
   updateWeatherUI(currentCity);
 
@@ -492,7 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   renderSuggestions();
 
-  // 4. Form thêm lịch trình
+  // 4. Form thêm lịch trình cho Thành phố hiện tại
   const form = document.getElementById('itineraryForm');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -501,7 +706,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!placeInput.value.trim()) return;
 
-    itineraryItems.push({
+    const currentList = getCurrentCityItinerary();
+    currentList.push({
       id: Date.now().toString(),
       title: placeInput.value.trim(),
       time: timeInput.value || '08:00',
@@ -513,6 +719,19 @@ document.addEventListener('DOMContentLoaded', () => {
     placeInput.value = '';
     placeInput.focus();
   });
+
+  // 4b. Sự kiện cho Modal xác nhận xóa
+  const btnCancelDelete = document.getElementById('btnCancelDelete');
+  const btnConfirmDelete = document.getElementById('btnConfirmDelete');
+  const deleteModalOverlay = document.getElementById('deleteConfirmModal');
+
+  if (btnCancelDelete) btnCancelDelete.addEventListener('click', closeDeleteModal);
+  if (btnConfirmDelete) btnConfirmDelete.addEventListener('click', executeDelete);
+  if (deleteModalOverlay) {
+    deleteModalOverlay.addEventListener('click', (e) => {
+      if (e.target === deleteModalOverlay) closeDeleteModal();
+    });
+  }
 
   // ==========================================================================
   // KHỞI TẠO BẢNG CHỌN GIỜ KÍNH MỜ (Glass Popover Dual-Wheel Controller)
